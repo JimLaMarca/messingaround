@@ -1,8 +1,9 @@
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const {db} = require('./databaseClient')
-const {transform} = require("./helpers/userListTransformer");
-const apiInstance = require('express')()
+import cors from 'cors';
+import * as bodyParser from "body-parser";
+const {db} = require('./databaseClient');
+import {transform} from './helpers/userListTransformer';
+import express from 'express';
+const apiInstance = express()
 const PORT = 8080;
 apiInstance.listen(PORT, () => console.log(`API running on http://localhost:${PORT}`))
 

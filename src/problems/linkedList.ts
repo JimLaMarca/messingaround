@@ -20,7 +20,7 @@ function LinkedList() {
             head = node
         } else {
             let currentNode = head
-            while (!!currentNode.next) {
+            while (currentNode.next) {
                 currentNode = currentNode.next
             }
             currentNode.next = node
