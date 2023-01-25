@@ -1,0 +1,20 @@
+{
+  "name": "messingaround",
+  "version": "1.0.0",
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "scripts": {
+    "install": "npm --prefix src/api install src/api && npm --prefix src/ui install src/ui && npm --prefix src/db install src/db"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JimLaMarca/messingaround.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JimLaMarca/messingaround/issues"
+  },
+  "homepage": "https://github.com/JimLaMarca/messingaround#readme"
+}

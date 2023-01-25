@@ -1,6 +1,6 @@
 import './userList.scss'
 
-import React, {FC, useState} from "react";
+import React, {FC} from "react";
 import MaleIcon from '@mui/icons-material/Male';
 import FemaleIcon from '@mui/icons-material/Female';
 import {
@@ -13,7 +13,7 @@ import {
     TableRow,
     Paper,
     IconButton,
-    styled, Button, Popover
+    styled
 } from '@mui/material'
 import {GenderOptions, UserProfile, useUserListHooks} from "./userListHooks";
 

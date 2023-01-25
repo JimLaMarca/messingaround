@@ -8,12 +8,18 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=messingaround
-      - PGDATA=/var/lib/postgresql/data/messingaround/
+      - PGDATA=/var/lib/postgresql/data/messingaround_data/
     ports:
       - '5432:5432'
     volumes:
       - ./src/db/:/var/lib/postgresql/data/
-      - ./src/db/database-fill.sql:/docker-entrypoint-initdb.d/fill_tables.sql
+      - ./src/db/database-init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
   api:
     container_name: messingAround-api
     build:
@@ -21,7 +27,8 @@ services:
       target: production
     image: messing_around_api
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     ports:
       - '8080:8080'
     environment:
