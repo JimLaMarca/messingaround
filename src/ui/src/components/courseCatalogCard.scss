@@ -1,0 +1,39 @@
+.courseCatalogCard {
+  width: 250px;
+}
+
+.courseCatalogCard-image {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.courseCatalogCard-textSection {
+  padding-left: 16px;
+  text-align: start;
+}
+
+.courseCatalogCard-topicText {
+  color: teal;
+  text-transform: uppercase;
+  font-size: 17px;
+}
+
+.courseCatalogCard-courseNameText {
+  font-size: 20px !important;
+  font-weight: bold !important;
+}
+
+.courseCatalogCard-icon {
+  padding-right: 8px;
+}
+
+.courseCatalogCard-bodyText {
+  font-size: 15px !important;
+}
+
+.courseCatalogCard-buttonSection {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  margin-right: 16px !important;
+  margin-left: 16px !important;
+}

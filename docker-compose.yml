@@ -1,0 +1,57 @@
+version: '3.8'
+services:
+  db:
+    container_name: messingAround-db
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=messingaround
+      - PGDATA=/var/lib/postgresql/data/messingaround/
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./src/db/:/var/lib/postgresql/data/
+      - ./src/db/database-fill.sql:/docker-entrypoint-initdb.d/fill_tables.sql
+  api:
+    container_name: messingAround-api
+    build:
+      context: src/api
+      target: production
+    image: messing_around_api
+    depends_on:
+      - db
+    ports:
+      - '8080:8080'
+    environment:
+      NODE_ENV: production
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: messingaround
+    links:
+      - db
+    volumes:
+      - ./src/api/:/src
+      - /api/node_modules
+  ui:
+    container_name: messingAround-ui
+    build:
+      context: src/ui/src
+      target: production
+    image: messing_around_ui
+    depends_on:
+      - db
+      - api
+    ports:
+      - '3000:3000'
+    links:
+      - api
+    volumes:
+      - ./src/ui/src/:/src
+      - /ui/node_modules
+volumes:
+  db:
+    driver: local
