@@ -14,5 +14,4 @@ VALUES ('Jim LaMarca', 33, 'Red', 'Software Engineer', 'male'),
        ('Dani LaMarca', 31, 'Teal', 'Product Owner', 'female'),
        ('Declan LaMarca', 3, 'Green', 'Mac & Cheese Eater', 'male'),
        ('Keeva LaMarca', 1, 'Purple', 'Professional Slider', 'female'),
-       ('Islay LaMarca', 7, 'Fire', 'Destroyer of Worlds', 'female'),
-       ('Mike LaMarca', 63, 'Blue', 'Mechanical Engineer', 'male');
+       ('Islay LaMarca', 7, 'Fire', 'Destroyer of Worlds', 'female');
