@@ -1,6 +1,6 @@
 import cors from 'cors';
 import * as bodyParser from "body-parser";
-const {db} = require('./databaseClient');
+import {db} from './databaseClient'
 import {transform} from './helpers/userListTransformer';
 import express from 'express';
 const apiInstance = express()
@@ -22,17 +22,18 @@ apiInstance.get('/', (req, res) => {
     res.send({apiData: 'Real Time API Data'})
 })
 
-apiInstance.get('/userList', async (req, res) => {
-    const {rows: userData} = await db.query(`SELECT * FROM users;`)
-    const formattedUserData = transform(userData)
-    res.send(
-        formattedUserData
-    )
-})
+apiInstance.get('/userList', async (req, res, next) => {
+    const response = await db.query(`SELECT * FROM users;`).then((result) => {
+        return transform(result.rows)
+    }).catch(next)
+
+    console.log('response', response)
+    res.send(response)
+});
 
 apiInstance.post('/userList', async (req, res) => {
     const data = req.body;
-    const {rows, ...rest} = await db.query(`INSERT INTO users (user_name, age, favorite_color, occupation, gender) VALUES  ('${data.userName}', '${data.age}', '${data.favoriteColor}', '${data.occupation}', '${data.gender}');`)
+    await db.query(`INSERT INTO users (user_name, age, favorite_color, occupation, gender) VALUES  ('${data.userName}', '${data.age}', '${data.favoriteColor}', '${data.occupation}', '${data.gender}');`)
     res.send({
             message: 'We got your data!',
     })

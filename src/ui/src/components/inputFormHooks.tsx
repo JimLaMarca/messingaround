@@ -27,7 +27,6 @@ type UserFormHooksReturn = {
 }
 
 type UserInputFormHooksProps = {
-    userList: UserProfile[]
     setUserList: (userList: UserProfile[]) => void
 }
 
@@ -55,6 +54,7 @@ export const UseInputFormHooks = (props: UserInputFormHooksProps): UserFormHooks
                     setUserList(updatedUserList)
                 })
                 formInformation.reset()
+                setError(null)
             })
         } catch  {
             setError('Submission Failed')

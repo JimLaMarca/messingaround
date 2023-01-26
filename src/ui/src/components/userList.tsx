@@ -13,7 +13,7 @@ import {
     TableRow,
     Paper,
     IconButton,
-    styled
+    styled, Typography, IconButtonProps
 } from '@mui/material'
 import {GenderOptions, UserProfile, useUserListHooks} from "./userListHooks";
 
@@ -37,6 +37,8 @@ export const UserList: FC<UserListProps> = (props: UserListProps) => {
 
     const ThemeTableCell = styled(TableCell)(({theme}) => ({
         backgroundColor: theme.palette.primary.main,
+        paddingLeft: theme.spacing(1),
+        paddingRight: theme.spacing(1)
     }));
 
     const SlimIconButton = styled(IconButton)(({theme}) => ({
@@ -54,21 +56,30 @@ export const UserList: FC<UserListProps> = (props: UserListProps) => {
         }
     }))
 
+    const HeaderRow = (props: {title: string, buttonProps: IconButtonProps}) => {
+        const {title, buttonProps} = props;
+        return (
+            <ThemeTableCell align="left">
+                <Typography variant="body2" noWrap>{title}<SlimIconButton {...buttonProps} /></Typography>
+            </ThemeTableCell>
+        )
+    }
+
     return(
         <Box className="userList" maxWidth={'100%'} my={1} >
                 <TableContainer component={Paper} sx={{maxHeight: 466}}>
                     <Table stickyHeader aria-label="user list table">
                         <TableHead className="userList-header" sx={{backgroundColor: 'blue'}}>
                             <TableRow>
-                                <ThemeTableCell align="left">User Name<SlimIconButton {...userNameOrderButtonProps} /></ThemeTableCell>
-                                <ThemeTableCell align="left">Age<SlimIconButton {...ageOrderButtonProps} /></ThemeTableCell>
-                                <ThemeTableCell align="left">Favorite Color<SlimIconButton {...favoriteColorOrderButtonProps} /></ThemeTableCell>
-                                <ThemeTableCell align="left">Occupation<SlimIconButton {...occupationOrderButtonProps} /></ThemeTableCell>
-                                <ThemeTableCell align="left">Gender<SlimIconButton {...genderOrderButtonProps} /></ThemeTableCell>
+                                <HeaderRow title={'User Name'} buttonProps={userNameOrderButtonProps}/>
+                                <HeaderRow title={'Age'} buttonProps={ageOrderButtonProps}/>
+                                <HeaderRow title={'Favorite Color'} buttonProps={favoriteColorOrderButtonProps}/>
+                                <HeaderRow title={'Occupation'} buttonProps={occupationOrderButtonProps}/>
+                                <HeaderRow title={'Gender'} buttonProps={genderOrderButtonProps}/>
                             </TableRow>
                         </TableHead>
                         <TableBody className="userList-body">
-                            {profileList.map((profile: UserProfile) => (
+                            { !!profileList ? profileList.map((profile: UserProfile) => (
                                 <ClickableRow key={profile.userName} onClick={() => {console.log(profile)}}>
                                     <TableCell align="left">{profile.userName}</TableCell>
                                     <TableCell align="left">{profile.age}</TableCell>
@@ -76,7 +87,7 @@ export const UserList: FC<UserListProps> = (props: UserListProps) => {
                                     <TableCell align="left">{profile.occupation}</TableCell>
                                     <TableCell align="center">{getGenderIcon(profile.gender)}</TableCell>
                                 </ClickableRow>
-                            ))}
+                            )) : null}
                         </TableBody>
                     </Table>
                 </TableContainer>

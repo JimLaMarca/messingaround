@@ -1,4 +1,4 @@
-function binarySearch(array, value) {
+function binarySearch(array: number[], value: number) {
     let lower = 0
     let upper = array.length -1
 
@@ -16,7 +16,7 @@ function binarySearch(array, value) {
     return -1
 }
 
-let values = []
+const values = []
 for (let i=0; i < 10000; i++) {
     values.push(i)
 }

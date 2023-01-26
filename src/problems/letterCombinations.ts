@@ -1,4 +1,4 @@
-const map: any = {
+const map: {[key: number]: string} = {
     '2': 'abc',
     '3': 'def',
     '4': 'ghi',
@@ -10,12 +10,12 @@ const map: any = {
 }
 
 function letterCombinations(digits: string): string[] {
-    let length = digits.length, result: string[] = []
+    const length = digits.length, result: string[] = []
     if (!length) return []
     const breadthFirstSearch = (index: number, string: string) => {
         if (index === length) result.push(string);
         else {
-            const letters = map[digits[index]]
+            const letters: string = map[parseInt(digits[index])]
             for(let i=0; i < letters.length ; i++) {
                 breadthFirstSearch(index+1, string + letters[i])
             }

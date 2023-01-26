@@ -81,4 +81,4 @@ function intToRoman2(num: number): string {
     romanNumber = `${romanNumber}${'I'.repeat(workingNum)}`;
 
     return romanNumber
-};
+}
